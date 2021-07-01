@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
@@ -12,7 +13,6 @@ class TalentShowPerson extends StatefulWidget {
 
 class _TalentShowPersonState extends State<TalentShowPerson> {
   String _name;
-  String _position;
   String _country;
   String _location;
   String _numberId;
@@ -29,7 +29,6 @@ class _TalentShowPersonState extends State<TalentShowPerson> {
       color: Colors.black87);
 
   final nameCtrl = TextEditingController();
-  final positionCtrl = TextEditingController();
   final countryCtrl = TextEditingController();
   final locationCtrl = TextEditingController();
   final numberIdCtrl = TextEditingController();
@@ -68,13 +67,7 @@ class _TalentShowPersonState extends State<TalentShowPerson> {
   }
   String valueChoose;
 
-  List listItems = [
-    'حارس مرمي',
-    'مهاجم',
-    'مدافع',
-    'جناح ايمن',
-    'جناح ايسر',
-  ];
+
   
   @override
   Widget build(BuildContext context) {
@@ -126,24 +119,6 @@ class _TalentShowPersonState extends State<TalentShowPerson> {
                         labelText: 'الاسم بالكامل'),
                     style: styleField,
                   ),
-                  SizedBox(height: 10),
-                  DropdownButton(
-                    icon: Icon(Icons.arrow_drop_down),
-                    iconSize: 36,
-                    isExpanded: true,
-                    hint: Text('مركز اللعب'),
-                      dropdownColor: Colors.white,
-                      value: valueChoose,
-                      onChanged: (newValue){
-                      setState(() {
-                        valueChoose = newValue;
-                      });
-                      },
-                      items: listItems.map((value){
-                    return DropdownMenuItem(
-                        child: Text(value),
-                    );
-                  }).toList()),
                   SizedBox(height: 10),
                   TextFormField(
                     autofocus: false,
@@ -260,6 +235,53 @@ class _TalentShowPersonState extends State<TalentShowPerson> {
                     style: styleField,
                   ),
                   SizedBox(height: 10),
+                  Container(
+                    alignment: Alignment.center,
+                    height: size.height*0.1,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: Colors.grey[600],
+
+                        )
+                    ),
+                    padding: EdgeInsets.only(right: size.width*0.035,left: size.width*0.02),
+                    width: size.width,
+                    child: DropdownButton<String>(
+                      hint: Text('مركز اللعب'),
+                      elevation: 0,
+                      isDense: false,
+                      isExpanded: true,
+                      value: valueChoose,
+                      autofocus: false,
+                      items: <String>[ "حارس مرمي", "مهاجم","مدافع","جناح ايمن","جناح ايسر"]
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                            value: value,
+                            child: Container(
+                              width: size.width,
+                              padding: EdgeInsets.only(left: size.width*0.4),
+                              child:  Text(
+                                value,
+                                textDirection: TextDirection.ltr,
+                                style: TextStyle(
+                                    fontFamily: "Cairo", letterSpacing: 0.6),
+                              ),
+                            )
+                        );
+                      }).toList(),
+                      onChanged: (String value) {
+                        setState(() {
+                          if (value == "Select") {
+
+                          } else {
+                            valueChoose = value;
+                          }
+                        });
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 10),
                   isLoading
                       ? Container(
                           width: size.width * 0.2,
@@ -366,7 +388,6 @@ class _TalentShowPersonState extends State<TalentShowPerson> {
     final email = emailCtrl.text;
     final numberId = numberIdCtrl.text;
     final country = countryCtrl.text;
-    final position = positionCtrl.text;
     final location = locationCtrl.text;
     setState(() {
       isLoading = true;
@@ -387,8 +408,8 @@ class _TalentShowPersonState extends State<TalentShowPerson> {
           'numberId': numberId,
           'email': email,
           'country': country,
-          'position': position,
-          'location': location,
+          'position': valueChoose,
+          'location': location
         }).whenComplete(() {
           nameCtrl.clear();
           dateCtrl.clear();
@@ -397,7 +418,6 @@ class _TalentShowPersonState extends State<TalentShowPerson> {
           numberIdCtrl.clear();
           countryCtrl.clear();
           locationCtrl.clear();
-          positionCtrl.clear();
           setState(() {
             file = null;
             isLoading = false;

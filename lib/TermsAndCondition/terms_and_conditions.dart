@@ -48,7 +48,7 @@ class _TermsAndCondState extends State<TermsAndCond> {
               textAlign: TextAlign.center,style: TextStyle(
                   color: Colors.grey[400],
                   fontWeight: FontWeight.w600,
-                  fontSize: size.width*0.08
+                  fontSize: size.width*0.04
                 ),),
             ),
             SizedBox(

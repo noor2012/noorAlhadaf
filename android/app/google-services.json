@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:730829734986:android:e00189282fd5e0d0a452b3",
+        "mobilesdk_app_id": "1:730829734986:android:45d90ae28fe815dfa452b3",
         "android_client_info": {
-          "package_name": "com.example.alhadaf"
+          "package_name": "com.alhaddafcommunitie"
         }
       },
       "oauth_client": [

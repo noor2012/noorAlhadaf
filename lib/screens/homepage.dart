@@ -1,4 +1,5 @@
 import 'package:alhadaf/Service/firestore_data.dart';
+import 'package:alhadaf/screens/search_screen.dart';
 import 'package:alhadaf/secondscreens/datealhadaf.dart';
 import 'package:alhadaf/secondscreens/heroAlhadaf.dart';
 import 'package:alhadaf/secondscreens/testalhadaf.dart';
@@ -22,6 +23,8 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Container(
+          height: size.height,
+          width: size.width,
           decoration: BoxDecoration(
             image: DecorationImage(
                 image: NetworkImage(
@@ -70,6 +73,10 @@ class _HomePageState extends State<HomePage> {
 
                         ),
                         child: TextField(
+                          onTap: (){
+                             Navigator.push(context, MaterialPageRoute(builder: (context)=> SearchScreen()));
+                          },
+                          readOnly: true,
                      decoration: InputDecoration(
                        contentPadding: EdgeInsets.only(bottom:1,top: 6),
                        border: InputBorder.none,
@@ -78,13 +85,6 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    // Positioned(
-                    //   top: 4,
-                    //   child: IconButton(onPressed: (){
-                    //     Database.fetchData();
-                    //
-                    //   }, icon: Icon(Icons.add,color: Colors.white,)),
-                    // )
                   ]
               ),
               SizedBox(

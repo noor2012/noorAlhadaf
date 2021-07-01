@@ -1,4 +1,4 @@
-package com.example.alhadaf
+package com.alhaddafcommunitie
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -13,11 +13,7 @@ class Match extends StatefulWidget {
 
 class _MatchState extends State<Match> {
   FlickManager flickManager;
-  @override
-  void dispose() {
-    flickManager.dispose();
-    super.dispose();
-  }
+
 
   @override
   Widget build(BuildContext context) {
